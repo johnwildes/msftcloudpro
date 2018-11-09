@@ -1,0 +1,32 @@
+# Ruby
+# Package your Ruby project.
+# Add steps that install rails, analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/ruby
+
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+steps:
+- task: UseRubyVersion@0
+  inputs:
+    versionSpec: '>= 2.5'
+
+- script: 'gem install jekyll bundler'
+  displayName: Install Jekyll and bundler
+
+- script: 'bundle install'
+  displayName: Install Gems
+
+- script: 'bundle exec jekyll build'
+  displayName: Build
+
+- task: CopyFiles@2
+  displayName: Copy "_site" to staging directory
+  inputs:
+    SourceFolder: '_site'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact: _site
+  inputs:
+    ArtifactName: '_site'
