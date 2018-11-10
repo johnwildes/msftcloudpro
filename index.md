@@ -4,3 +4,4 @@
 
 layout: home
 ---
+[![Build Status](https://dev.azure.com/deckplatedevcorp/CorpWebsite/_apis/build/status/msftcloud.pro-CI)](https://dev.azure.com/deckplatedevcorp/CorpWebsite/_build/latest?definitionId=4)
